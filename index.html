@@ -30,10 +30,10 @@
             margin-top: 10px;
         }
 
-        input[type="number"],
+        select,
         input[type="date"],
         input[type="text"] {
-            width: calc(100% - 22px);
+            width: 100%;
             padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
@@ -73,71 +73,99 @@
             <input type="text" id="userName" name="userName" readonly>
 
             <label for="ikoi">いこい:</label>
-            <input type="number" id="ikoi" name="ikoi" min="0" max="5" value="0">
+            <select id="ikoi" name="ikoi">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
             <label for="ikoiLight">いこいライト:</label>
-            <input type="number" id="ikoiLight" name="ikoiLight" min="0" max="5" value="0">
+            <select id="ikoiLight" name="ikoiLight">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
             <label for="special">スペシャル:</label>
-            <input type="number" id="special" name="special" min="0" max="5" value="0">
+            <select id="special" name="special">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
             <label for="specialLight">スペシャルライト:</label>
-            <input type="number" id="specialLight" name="specialLight" min="0" max="5" value="0">
+            <select id="specialLight" name="specialLight">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
             <label for="ikoiOkazu">いこい・おかず:</label>
-            <input type="number" id="ikoiOkazu" name="ikoiOkazu" min="0" max="5" value="0">
+            <select id="ikoiOkazu" name="ikoiOkazu">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
             <label for="specialOkazu">スペシャル・おかず:</label>
-            <input type="number" id="specialOkazu" name="specialOkazu" min="0" max="5" value="0">
+            <select id="specialOkazu" name="specialOkazu">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
             <label for="seseragi">せせらぎ:</label>
-            <input type="number" id="seseragi" name="seseragi" min="0" max="5" value="0">
+            <select id="seseragi" name="seseragi">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
             <label for="seseragiLight">せせらぎライト:</label>
-            <input type="number" id="seseragiLight" name="seseragiLight" min="0" max="5" value="0">
+            <select id="seseragiLight" name="seseragiLight">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
             <label for="misoSoup">味噌汁:</label>
-            <input type="number" id="misoSoup" name="misoSoup" min="0" max="5" value="0">
+            <select id="misoSoup" name="misoSoup">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
 
             <button type="submit">注文する</button>
         </form>
     </div>
 
-    <script src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 今日の日付をデフォルト値として設定
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('orderDate').value = today;
-
-            // WOFF SDKを初期化してユーザー情報を取得
-            woff.init({ woffId: 'hQ31LR6I8QrYI0-bd4dn0Q' })
-                .then(() => woff.getProfile())
-                .then(profile => {
-                    document.getElementById('userName').value = profile.displayName;
-                })
-                .catch(err => {
-                    console.error('WOFF SDKの初期化またはプロフィール取得に失敗しました:', err);
-                });
-
-            // フォームの送信イベントを処理
-            document.getElementById('orderForm').addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                const orderData = {
-                    orderDate: document.getElementById('orderDate').value,
-                    userName: document.getElementById('userName').value,
-                    ikoi: parseInt(document.getElementById('ikoi').value),
-                    ikoiLight: parseInt(document.getElementById('ikoiLight').value),
-                    special: parseInt(document.getElementById('special').value),
-                    specialLight: parseInt(document.getElementById('specialLight').value),
-                    ikoiOkazu: parseInt(document.getElementById('ikoiOkazu').value),
-                    specialOkazu: parseInt(document.getElementById('specialOkazu').value),
-                    seseragi: parseInt(document.getElementById('seseragi').value),
-                    seseragiLight: parseInt(document.getElementById('seseragiLight').value),
-                    misoSoup: parseInt(document.getElementById('misoSoup').value)
-                };
-
-                // kintone REST APIを使用
-::contentReference[oaicite:8]{index=8}
+    <script src="https://static.worksmobile.net/static/wm/woff/edge/
+::contentReference[oaicite:6]{index=6}
  
