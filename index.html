@@ -150,6 +150,10 @@
             // ラジオボタンの生成関数
             function createRadioButtons(containerId, name) {
                 const container = document.getElementById(containerId);
+                if (!container) {
+                    console.error(`Container with id '${containerId}' not found.`);
+                    return;
+                }
                 for (let i = 0; i <= 5; i++) {
                     const radioWrapper = document.createElement('div');
                     const radio = document.createElement('input');
@@ -167,6 +171,6 @@
                 }
             }
 
-            // 各お弁当
-::contentReference[oaicite:15]{index=15}
+            // 各お弁当の
+::contentReference[oaicite:14]{index=14}
  
