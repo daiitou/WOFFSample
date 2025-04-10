@@ -65,23 +65,17 @@
         document.addEventListener('DOMContentLoaded', function () {
             // WOFF SDKの初期化
             woff.init({ woffId: 'YOUR_WOFF_ID' })
-                .then(() => {
-                    // ユーザープロフィールの取得
-                    return woff.getProfile();
-                })
+                .then(() => woff.getProfile())
                 .then(profile => {
-                    // ユーザー名をフォームに設定
                     document.getElementById('userName').value = profile.displayName;
                 })
                 .catch(err => {
                     console.error('WOFF SDKの初期化またはプロフィール取得に失敗しました:', err);
                 });
 
-            // 今日の日付を注文日フィールドに設定
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('orderDate').value = today;
 
-            // フォームの送信イベントハンドラ
             document.getElementById('orderForm').addEventListener('submit', function (event) {
                 event.preventDefault();
                 const orderData = {
@@ -98,7 +92,7 @@
                     misoSoup: parseInt(document.getElementById('misoSoup').value)
                 };
                 console.log('注文データ:', orderData);
-                // ここで注文データをサーバーに送信する処理を追加できます
+                // TODO: Kintone連携などの処理をここに追加
             });
         });
     </script>
@@ -116,58 +110,61 @@
 
             <label for="ikoi">いこい:</label>
             <select id="ikoi" name="ikoi">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
             </select>
 
             <label for="ikoiLight">いこいライト:</label>
             <select id="ikoiLight" name="ikoiLight">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
             </select>
 
             <label for="special">スペシャル:</label>
             <select id="special" name="special">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
             </select>
 
             <label for="specialLight">スペシャルライト:</label>
             <select id="specialLight" name="specialLight">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
             </select>
 
             <label for="ikoiOkazu">いこい・おかず:</label>
             <select id="ikoiOkazu" name="ikoiOkazu">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
             </select>
 
             <label for="specialOkazu">スペシャル・おかず:</label>
             <select id="specialOkazu" name="specialOkazu">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <
-::contentReference[oaicite:0]{index=0}
- 
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+            </select>
+
+            <label for="seseragi">せせらぎ:</label>
+            <select id="seseragi" name="seseragi">
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+            </select>
+
+            <label for="seseragiLight">せせらぎライト:</label>
+            <select id="seseragiLight" name="seseragiLight">
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+            </select>
+
+            <label for="misoSoup">味噌汁:</label>
+            <select id="misoSoup" name="misoSoup">
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+            </select>
+
+            <button type="submit">注文する</button>
+        </form>
+    </div>
+</body>
+
+</html>
