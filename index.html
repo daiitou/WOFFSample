@@ -67,7 +67,11 @@
         <h2>お弁当注文フォーム</h2>
         <form id="orderForm">
             <label for="orderDate">注文日:</label>
-            <input type="date" id="orderDate" name="orderDate" required>
+            <div style="display: flex; align-items: center;">
+                <input type="date" id="orderDate" name="orderDate" required>
+                <button type="button" id="setToday" style="margin-left: 10px;">今日</button>
+            </div>
+
 
             <label for="userName">ユーザー名:</label>
             <input type="text" id="userName" name="userName" readonly>
