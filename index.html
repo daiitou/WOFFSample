@@ -2,169 +2,209 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>お弁当注文フォーム</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 20px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>お弁当注文フォーム</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 20px;
+    }
 
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: auto;
-        }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: auto;
+    }
 
-        h2 {
-            text-align: center;
-        }
+    h2 {
+      text-align: center;
+    }
 
-        label {
-            display: block;
-            margin-top: 10px;
-        }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
 
-        input[type="date"],
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    input[type="date"],
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-        input[readonly] {
-            background-color: #e9e9e9;
-        }
+    input[readonly] {
+      background-color: #e9e9e9;
+    }
 
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-    <script src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // WOFF SDKの初期化
-            woff.init({ woffId: 'hQ31LR6I8QrYI0-bd4dn0Q' })
-                .then(() => woff.getProfile())
-                .then(profile => {
-                    document.getElementById('userName').value = profile.displayName;
-                })
-                .catch(err => {
-                    console.error('WOFF SDKの初期化またはプロフィール取得に失敗しました:', err);
-                });
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <script src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // WOFF SDKの初期化
+      woff
+        .init({ woffId: "hQ31LR6I8QrYI0-bd4dn0Q" }) // ←ここはあなたのWOFFアプリIDに置き換えてください
+        .then(() => woff.getProfile())
+        .then((profile) => {
+          document.getElementById("userName").value = profile.displayName;
+        })
+        .catch((err) => {
+          console.error("WOFF SDKの初期化またはプロフィール取得に失敗:", err);
+        });
 
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('orderDate').value = today;
+      // 今日の日付を注文日フィールドに設定
+      const today = new Date().toISOString().split("T")[0];
+      document.getElementById("orderDate").value = today;
 
-            document.getElementById('orderForm').addEventListener('submit', function (event) {
-                event.preventDefault();
-                const orderData = {
-                    orderDate: document.getElementById('orderDate').value,
-                    userName: document.getElementById('userName').value,
-                    ikoi: parseInt(document.getElementById('ikoi').value),
-                    ikoiLight: parseInt(document.getElementById('ikoiLight').value),
-                    special: parseInt(document.getElementById('special').value),
-                    specialLight: parseInt(document.getElementById('specialLight').value),
-                    ikoiOkazu: parseInt(document.getElementById('ikoiOkazu').value),
-                    specialOkazu: parseInt(document.getElementById('specialOkazu').value),
-                    seseragi: parseInt(document.getElementById('seseragi').value),
-                    seseragiLight: parseInt(document.getElementById('seseragiLight').value),
-                    misoSoup: parseInt(document.getElementById('misoSoup').value)
-                };
-                console.log('注文データ:', orderData);
-                // TODO: Kintone連携などの処理をここに追加
+      // フォーム送信処理
+      document
+        .getElementById("orderForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const orderData = {
+            orderDate: document.getElementById("orderDate").value,
+            userName: document.getElementById("userName").value,
+            ikoi: parseInt(document.getElementById("ikoi").value),
+            ikoiLight: parseInt(document.getElementById("ikoiLight").value),
+            special: parseInt(document.getElementById("special").value),
+            specialLight: parseInt(document.getElementById("specialLight").value),
+            ikoiOkazu: parseInt(document.getElementById("ikoiOkazu").value),
+            specialOkazu: parseInt(document.getElementById("specialOkazu").value),
+            seseragi: parseInt(document.getElementById("seseragi").value),
+            seseragiLight: parseInt(document.getElementById("seseragiLight").value),
+            misoSoup: parseInt(document.getElementById("misoSoup").value),
+          };
+
+          console.log("注文データ:", orderData);
+
+          // kintoneに登録
+          fetch("https://axij3t4zaqib.cybozu.com/k/v1/record.json", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Cybozu-API-Token": "K2FoTUtrY35e31YyUn73TwS4t0P4uQq84WKpZ1w8" // ← あなたのAPIトークンに置き換えてください
+            },
+            body: JSON.stringify({
+              app: "79",
+              record: {
+                orderDate: { value: orderData.orderDate },
+                userName: { value: orderData.userName },
+                ikoi: { value: orderData.ikoi },
+                ikoiLight: { value: orderData.ikoiLight },
+                special: { value: orderData.special },
+                specialLight: { value: orderData.specialLight },
+                ikoiOkazu: { value: orderData.ikoiOkazu },
+                specialOkazu: { value: orderData.specialOkazu },
+                seseragi: { value: orderData.seseragi },
+                seseragiLight: { value: orderData.seseragiLight },
+                misoSoup: { value: orderData.misoSoup }
+              }
+            })
+          })
+            .then(response => response.json())
+            .then(data => {
+              console.log("kintone登録成功:", data);
+              alert("注文を受け付けました！");
+            })
+            .catch(error => {
+              console.error("kintone登録失敗:", error);
+              alert("注文送信に失敗しました。");
             });
         });
-    </script>
+    });
+  </script>
 </head>
 
 <body>
-    <div class="container">
-        <h2>お弁当注文フォーム</h2>
-        <form id="orderForm">
-            <label for="orderDate">注文日:</label>
-            <input type="date" id="orderDate" name="orderDate" required>
+  <div class="container">
+    <h2>お弁当注文フォーム</h2>
+    <form id="orderForm">
+      <label for="orderDate">注文日:</label>
+      <input type="date" id="orderDate" name="orderDate" required />
 
-            <label for="userName">ユーザー名:</label>
-            <input type="text" id="userName" name="userName" readonly>
+      <label for="userName">ユーザー名:</label>
+      <input type="text" id="userName" name="userName" readonly />
 
-            <label for="ikoi">いこい:</label>
-            <select id="ikoi" name="ikoi">
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-            </select>
+      <label for="ikoi">いこい:</label>
+      <select id="ikoi" name="ikoi">
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
 
-            <label for="ikoiLight">いこいライト:</label>
-            <select id="ikoiLight" name="ikoiLight">
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-            </select>
+      <label for="ikoiLight">いこいライト:</label>
+      <select id="ikoiLight" name="ikoiLight">
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
 
-            <label for="special">スペシャル:</label>
-            <select id="special" name="special">
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-            </select>
+      <label for="special">スペシャル:</label>
+      <select id="special" name="special">
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
 
-            <label for="specialLight">スペシャルライト:</label>
-            <select id="specialLight" name="specialLight">
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-            </select>
+      <label for="specialLight">スペシャルライト:</label>
+      <select id="specialLight" name="specialLight">
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
 
-            <label for="ikoiOkazu">いこい・おかず:</label>
-            <select id="ikoiOkazu" name="ikoiOkazu">
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-            </select>
+      <label for="ikoiOkazu">いこい・おかず:</label>
+      <select id="ikoiOkazu" name="ikoiOkazu">
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
 
-            <label for="specialOkazu">スペシャル・おかず:</label>
-            <select id="specialOkazu" name="specialOkazu">
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-            </select>
+      <label for="specialOkazu">スペシャル・おかず:</label>
+      <select id="specialOkazu" name="specialOkazu">
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
 
-            <label for="seseragi">せせらぎ:</label>
-            <select id="seseragi" name="seseragi">
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-            </select>
+      <label for="seseragi">せせらぎ:</label>
+      <select id="seseragi" name="seseragi">
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
 
-            <label for="seseragiLight">せせらぎライト:</label>
-            <select id="seseragiLight" name="seseragiLight">
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-            </select>
+      <label for="seseragiLight">せせらぎライト:</label>
+      <select id="seseragiLight" name="seseragiLight">
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
 
-            <label for="misoSoup">味噌汁:</label>
-            <select id="misoSoup" name="misoSoup">
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option>
-                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-            </select>
+      <label for="misoSoup">味噌汁:</label>
+      <select id="misoSoup" name="misoSoup">
+        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
 
-            <button type="submit">注文する</button>
-        </form>
-    </div>
+      <button type="submit">注文する</button>
+    </form>
+  </div>
 </body>
 
 </html>
