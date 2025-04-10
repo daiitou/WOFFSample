@@ -30,10 +30,15 @@
             margin-top: 10px;
         }
 
-        select,
+        .date-container {
+            display: flex;
+            align-items: center;
+        }
+
         input[type="date"],
-        input[type="text"] {
-            width: 100%;
+        input[type="text"],
+        select {
+            flex: 1;
             padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
@@ -44,7 +49,21 @@
             background-color: #e9e9e9;
         }
 
-        button {
+        .today-button {
+            margin-left: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .today-button:hover {
+            background-color: #45a049;
+        }
+
+        button[type="submit"] {
             display: block;
             width: 100%;
             padding: 10px;
@@ -56,7 +75,7 @@
             cursor: pointer;
         }
 
-        button:hover {
+        button[type="submit"]:hover {
             background-color: #45a049;
         }
     </style>
@@ -67,11 +86,10 @@
         <h2>お弁当注文フォーム</h2>
         <form id="orderForm">
             <label for="orderDate">注文日:</label>
-            <div style="display: flex; align-items: center;">
+            <div class="date-container">
                 <input type="date" id="orderDate" name="orderDate" required>
-                <button type="button" id="setToday" style="margin-left: 10px;">今日</button>
+                <button type="button" class="today-button" id="setToday">今日</button>
             </div>
-
 
             <label for="userName">ユーザー名:</label>
             <input type="text" id="userName" name="userName" readonly>
@@ -162,15 +180,6 @@
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-            <button type="submit">注文する</button>
-        </form>
-    </div>
-    
-document.getElementById('setToday').addEventListener('click', function() {
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('orderDate').value = today;
-});
+                <
+::contentReference[oaicite:3]{index=3}
+ 
