@@ -1,218 +1,136 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WOFF アプリ サンプル</title>
-    <script>
-        // WOFF アプリ ID を設定する
-        const woffId = "hQ31LR6I8QrYI0-bd4dn0Q";
-    </script>
+    <title>お弁当注文フォーム</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-
-        :root {
-            --fluorescent-green: #66ff00;
-        }
-
         body {
-            font-family: 'Orbitron', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(45deg, #09c6f9, #045de9);
-            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 20px;
         }
-
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
         .container {
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 10px;
-        }
-
-        .section {
-            background-color: rgba(10, 10, 10, 0.5);
-            border-radius: 10px;
-            margin-bottom: 20px;
+            background-color: #fff;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 2px solid var(--fluorescent-green);
-            display: flex;
-            flex-direction: column;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: auto;
         }
-
-        .btn {
-            display: block;
-            margin: 20px 0;
-            padding: 15px 30px;
-            background-color: transparent;
-            color: #00c6ff;
+        h2 {
             text-align: center;
-            border: 2px solid #00c6ff;
-            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="number"], input[type="date"], input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[readonly] {
+            background-color: #e9e9e9;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            align-self: center;
-            font-size: 18px;
         }
-
-
-        .btn:hover {
-            background-color: var(--fluorescent-green);
-            color: #020b2e;
-        }
-
-        #sendLocationBtn,
-        #sendQRDataBtn {
-            display: none;
-        }
-
-        #sendQRBtn {
-            display: none;
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
-
 <body>
-
-    <header>
-        <h1>WOFF アプリ サンプル</h1>
-    </header>
-
     <div class="container">
-        <!-- ユーザープロフィール情報のセクション -->
-        <div class="section" id="userProfileSection">
-            <h2>ユーザーのプロフィール情報</h2>
-            <p>woff.getProfile() メソッドでログイン中のユーザーのプロフィール情報を取得して表示しています。</p>
-            <div id="userProfileInfo"></div>
-        </div>
+        <h2>お弁当注文フォーム</h2>
+        <form id="orderForm">
+            <label for="orderDate">注文日:</label>
+            <input type="date" id="orderDate" name="orderDate" required>
 
-        <!-- 位置情報のセクション -->
-        <div class="section">
-            <h2>位置情報の取得</h2>
-            <p>Geolocation API で位置情報を取得します。</p>
-            <button class="btn" id="getLocationBtn">位置情報を取得</button>
-            <div id="locationInfo"></div>
-            <button class="btn" id="sendLocationBtn">取得した位置情報を送信</button>
-        </div>
+            <label for="userName">ユーザー名:</label>
+            <input type="text" id="userName" name="userName" readonly>
 
-        <!-- QRコードリーダーのセクション -->
-        <div class="section">
-            <h2>QRコードをスキャンする</h2>
-            <p>woff.scanQR() メソッドで QR コードリーダーを起動して QR コードの読み込みを行います。</p>
-            <button class="btn" id="scanQRBtn">QR コードリーダーを起動</button>
-            <div id="qrResult"></div>
-            <button class="btn" id="sendQRDataBtn">取得したQRコード情報を送信</button>
-        </div>
+            <label for="ikoi">いこい:</label>
+            <input type="number" id="ikoi" name="ikoi" min="0" max="5" value="0">
 
-        <!-- アプリ終了のセクション -->
-        <div class="section">
-            <h2>アプリを終了する</h2>
-            <p>woff.closeWindow() メソッドで WOFF アプリを終了します。</p>
-            <button class="btn" id="exitAppBtn">アプリを終了</button>
-        </div>
+            <label for="ikoiLight">いこいライト:</label>
+            <input type="number" id="ikoiLight" name="ikoiLight" min="0" max="5" value="0">
+
+            <label for="special">スペシャル:</label>
+            <input type="number" id="special" name="special" min="0" max="5" value="0">
+
+            <label for="specialLight">スペシャルライト:</label>
+            <input type="number" id="specialLight" name="specialLight" min="0" max="5" value="0">
+
+            <label for="ikoiOkazu">いこい・おかず:</label>
+            <input type="number" id="ikoiOkazu" name="ikoiOkazu" min="0" max="5" value="0">
+
+            <label for="specialOkazu">スペシャル・おかず:</label>
+            <input type="number" id="specialOkazu" name="specialOkazu" min="0" max="5" value="0">
+
+            <label for="seseragi">せせらぎ:</label>
+            <input type="number" id="seseragi" name="seseragi" min="0" max="5" value="0">
+
+            <label for="seseragiLight">せせらぎライト:</label>
+            <input type="number" id="seseragiLight" name="seseragiLight" min="0" max="5" value="0">
+
+            <label for="misoSoup">味噌汁:</label>
+            <input type="number" id="misoSoup" name="misoSoup" min="0" max="5" value="0">
+
+            <button type="submit">注文する</button>
+        </form>
     </div>
 
     <script>
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                document.getElementById("locationInfo").innerHTML = "このブラウザはGeolocationをサポートしていません。";
-            }
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // 今日の日付をデフォルト値として設定
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('orderDate').value = today;
 
-        function showPosition(position) {
-            document.getElementById("locationInfo").innerHTML = "Latitude: " + position.coords.latitude +
-                ", Longitude: " + position.coords.longitude;
-            document.getElementById("sendLocationBtn").style.display = "block";
-        }
-
-        function sendLocationToWOFF() {
-            const locationInfoElem = document.getElementById("locationInfo");
-            const messageContent = locationInfoElem.textContent;
-
-            woff.sendMessage({
-                content: messageContent
-            })
-                .then(() => {
-                    alert('Sent successfully');
+            // WOFF SDKを初期化してユーザー情報を取得
+            woff.init({ woffId: 'YOUR_WOFF_ID' })
+                .then(() => woff.getProfile())
+                .then(profile => {
+                    document.getElementById('userName').value = profile.displayName;
                 })
-                .catch((err) => {
-                    alert('error: ' + err);
+                .catch(err => {
+                    console.error('WOFF SDKの初期化またはプロフィール取得に失敗しました:', err);
                 });
-        }
 
-        function scanQRCode() {
-            woff.scanQR()
-                .then((result) => {
-                    document.getElementById("qrResult").innerHTML = "Scanned Info: " + result.value;
-                    document.getElementById("sendQRDataBtn").style.display = "block";
-                })
-                .catch((err) => {
-                    alert('error: ' + err);
-                });
-        }
+            // フォームの送信イベントを処理
+            document.getElementById('orderForm').addEventListener('submit', function(event) {
+                event.preventDefault();
 
-        function sendQRToWOFF() {
-            const qrResultElem = document.getElementById("qrResult");
-            const messageContent = qrResultElem.textContent;
+                const orderData = {
+                    orderDate: document.getElementById('orderDate').value,
+                    userName: document.getElementById('userName').value,
+                    ikoi: parseInt(document.getElementById('ikoi').value),
+                    ikoiLight: parseInt(document.getElementById('ikoiLight').value),
+                    special: parseInt(document.getElementById('special').value),
+                    specialLight: parseInt(document.getElementById('specialLight').value),
+                    ikoiOkazu: parseInt(document.getElementById('ikoiOkazu').value),
+                    specialOkazu: parseInt(document.getElementById('specialOkazu').value),
+                    seseragi: parseInt(document.getElementById('seseragi').value),
+                    seseragiLight: parseInt(document.getElementById('seseragiLight').value),
+                    misoSoup: parseInt(document.getElementById('misoSoup').value)
+                };
 
-            woff.sendMessage({
-                content: messageContent
-            })
-                .then(() => {
-                    alert('QRコードの情報を送信しました');
-                })
-                .catch((err) => {
-                    alert('error: ' + err);
-                });
-        }
-
-        document.getElementById("exitAppBtn").addEventListener("click", function () {
-            woff.closeWindow();
+                // ここでorderDataをサーバーに送信する処理を追加します
+                console.log('注文データ:', orderData);
+            });
         });
-
-        window.onload = function () {
-            woff
-                .init({
-                    woffId: woffId
-                })
-                .then(() => {
-                    woff.getProfile().then(profile => {
-                        const profileInfoElem = document.getElementById("userProfileInfo");
-                        profileInfoElem.innerHTML = `
-                    ドメイン ID: ${profile.domainId} <br>
-                    ユーザー ID: ${profile.userId} <br>
-                    ユーザー名: ${profile.displayName}
-                `;
-                    }).catch(error => {
-                        console.error('Profile error:', error);
-                    });
-                })
-                .catch((err) => {
-                    console.log(err.code, err.message);
-                });
-
-            document.getElementById("getLocationBtn").addEventListener("click", getLocation);
-            document.getElementById("sendLocationBtn").addEventListener("click", sendLocationToWOFF);
-            document.getElementById("scanQRBtn").addEventListener("click", scanQRCode);
-            document.getElementById("sendQRDataBtn").addEventListener("click", sendQRToWOFF);
-        };
     </script>
-    <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
+    <script src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
 </body>
-
 </html>
