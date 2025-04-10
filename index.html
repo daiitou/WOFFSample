@@ -169,7 +169,14 @@
             <button type="submit">注文する</button>
         </form>
     </div>
+    
+document.getElementById('setToday').addEventListener('click', function() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('orderDate').value = today;
+});
 
+
+    
     <
 ::contentReference[oaicite:6]{index=6}
  
