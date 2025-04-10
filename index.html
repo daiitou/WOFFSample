@@ -60,6 +60,48 @@
             background-color: #45a049;
         }
     </style>
+    <script src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // WOFF SDKの初期化
+            woff.init({ woffId: 'YOUR_WOFF_ID' })
+                .then(() => {
+                    // ユーザープロフィールの取得
+                    return woff.getProfile();
+                })
+                .then(profile => {
+                    // ユーザー名をフォームに設定
+                    document.getElementById('userName').value = profile.displayName;
+                })
+                .catch(err => {
+                    console.error('WOFF SDKの初期化またはプロフィール取得に失敗しました:', err);
+                });
+
+            // 今日の日付を注文日フィールドに設定
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('orderDate').value = today;
+
+            // フォームの送信イベントハンドラ
+            document.getElementById('orderForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const orderData = {
+                    orderDate: document.getElementById('orderDate').value,
+                    userName: document.getElementById('userName').value,
+                    ikoi: parseInt(document.getElementById('ikoi').value),
+                    ikoiLight: parseInt(document.getElementById('ikoiLight').value),
+                    special: parseInt(document.getElementById('special').value),
+                    specialLight: parseInt(document.getElementById('specialLight').value),
+                    ikoiOkazu: parseInt(document.getElementById('ikoiOkazu').value),
+                    specialOkazu: parseInt(document.getElementById('specialOkazu').value),
+                    seseragi: parseInt(document.getElementById('seseragi').value),
+                    seseragiLight: parseInt(document.getElementById('seseragiLight').value),
+                    misoSoup: parseInt(document.getElementById('misoSoup').value)
+                };
+                console.log('注文データ:', orderData);
+                // ここで注文データをサーバーに送信する処理を追加できます
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -69,8 +111,8 @@
             <label for="orderDate">注文日:</label>
             <input type="date" id="orderDate" name="orderDate" required>
 
-            <label for="displayName">ユーザー名:</label>
-            <input type="text" id="displayName" name="displayName" readonly>
+            <label for="userName">ユーザー名:</label>
+            <input type="text" id="userName" name="userName" readonly>
 
             <label for="ikoi">いこい:</label>
             <select id="ikoi" name="ikoi">
@@ -126,53 +168,6 @@
             <select id="specialOkazu" name="specialOkazu">
                 <option value="0">0</option>
                 <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-            <label for="seseragi">せせらぎ:</label>
-            <select id="seseragi" name="seseragi">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-            <label for="seseragiLight">せせらぎライト:</label>
-            <select id="seseragiLight" name="seseragiLight">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-            <label for="misoSoup">味噌汁:</label>
-            <select id="misoSoup" name="misoSoup">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-            <button type="submit">注文する</button>
-        </form>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 今日の日付を取得して注文日入力欄に設定
-            const today = new Date();
-            const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, '0');
-            const day = String(today.getDate()).padStart(2, '0');
-            const formattedDate = `${year}-${month
+                <
 ::contentReference[oaicite:0]{index=0}
  
